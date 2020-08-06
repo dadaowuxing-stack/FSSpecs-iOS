@@ -22,7 +22,11 @@ Pod::Spec.new do |s|
   s.source_files           = "Libraries/Network/*.{m,mm}"
   s.preserve_paths         = "package.json", "LICENSE", "LICENSE-docs"
   s.header_dir             = "RCTNetwork"
-
+  s.pod_target_xcconfig    = {
+                               "USE_HEADERMAP" => "YES",
+                               "CLANG_CXX_LANGUAGE_STANDARD" => "c++14",
+                               "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/Folly\""
+                             }
   s.frameworks             = "MobileCoreServices"
 
   s.dependency "Folly", folly_version
