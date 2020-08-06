@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
   s.version                = version
   s.summary                = "An API for displaying iOS action sheets and share sheets."
   s.homepage               = "http://facebook.github.io/react-native/"
-  s.license                = package["license"]
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
   s.compiler_flags         = folly_compiler_flags + ' -Wno-nullability-completeness'
