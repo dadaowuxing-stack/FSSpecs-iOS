@@ -2,6 +2,7 @@ version = '0.62.2'
 
 source = { :git => ENV['INSTALL_YOGA_FROM_LOCATION'] || 'https://github.com/facebook/react-native.git' }
 if version == '1000.0.0'
+  # This is an unpublished version, use the latest commit hash of the react-native repo, which we’re presumably in.
   source[:commit] = `git rev-parse HEAD`.strip
 else
   source[:tag] = "v#{version}"
@@ -23,6 +24,9 @@ Pod::Spec.new do |spec|
   spec.module_name = 'yoga'
   spec.header_dir = 'yoga'
   spec.requires_arc = false
+  spec.pod_target_xcconfig = {
+      'DEFINES_MODULE' => 'YES'
+  }
   spec.compiler_flags = [
       '-fno-omit-frame-pointer',
       '-fexceptions',
@@ -34,6 +38,14 @@ Pod::Spec.new do |spec|
 
   # Pinning to the same version as React.podspec.
   spec.platforms = { :ios => "9.0", :tvos => "9.2" }
-  spec.source_files = 'ReactCommon/yoga/yoga/**/*.{cpp,h}'
-  spec.public_header_files = header_files = 'ReactCommon/yoga/yoga/{Yoga,YGEnums,YGMacros,YGValue}.h'
+
+  # Set this environment variable when *not* using the `:path` option to install the pod.
+  # E.g. when publishing this spec to a spec repo.
+  source_files = 'ReactCommon/yoga/yoga/**/*.{cpp,h}'
+  source_files = File.join('ReactCommon/yoga', source_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+  spec.source_files = source_files
+
+  header_files = 'ReactCommon/yoga/yoga/{Yoga,YGEnums,YGMacros,YGValue}.h'
+  header_files = File.join('ReactCommon/yoga', header_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+  spec.public_header_files = header_files
 end

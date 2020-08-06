@@ -16,11 +16,12 @@ Pod::Spec.new do |s|
   s.version                = version
   s.summary                = "An API for displaying iOS action sheets and share sheets."
   s.homepage               = "http://facebook.github.io/react-native/"
+  s.license                = package["license"]
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
+  s.compiler_flags         = folly_compiler_flags + ' -Wno-nullability-completeness'
   s.source                 = source
-  # RCTBlobCollector.h is not included in the React module as it has C++ code
-  s.source_files           = "Libraries/Blob/*.{m,mm}", "Libraries/Blob/RCTBlobCollector.h"
+  s.source_files           = "Libraries/Blob/*.{m,mm}"
   s.preserve_paths         = "package.json", "LICENSE", "LICENSE-docs"
   s.header_dir             = "RCTBlob"
   s.pod_target_xcconfig    = {

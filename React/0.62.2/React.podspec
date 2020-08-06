@@ -1,7 +1,13 @@
+# Copyright (c) Facebook, Inc. and its affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
 version = '0.62.2'
 
 source = { :git => 'https://github.com/facebook/react-native.git' }
 if version == '1000.0.0'
+  # This is an unpublished version, use the latest commit hash of the react-native repo, which we’re presumably in.
   source[:commit] = `git rev-parse HEAD`.strip
 else
   source[:tag] = "v#{version}"
@@ -10,7 +16,7 @@ end
 Pod::Spec.new do |s|
   s.name                   = "React"
   s.version                = version
-  s.summary                = ""
+  s.summary                = package["description"]
   s.description            = <<-DESC
                                React Native apps are built using the React JS
                                framework, and render directly to native UIKit
