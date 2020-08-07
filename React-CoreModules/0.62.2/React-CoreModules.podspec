@@ -1,7 +1,13 @@
+# Copyright (c) Facebook, Inc. and its affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
 version = '0.62.2'
 
 source = { :git => 'https://github.com/facebook/react-native.git' }
 if version == '1000.0.0'
+  # This is an unpublished version, use the latest commit hash of the react-native repo, which we’re presumably in.
   source[:commit] = `git rev-parse HEAD`.strip
 else
   source[:tag] = "v#{version}"
@@ -28,9 +34,9 @@ Pod::Spec.new do |s|
                              }
 
   s.dependency "FBReactNativeSpec", version
-  s.dependency "RCTTypeSafety", version
-  s.dependency "React-RCTImage", version
   s.dependency "Folly", folly_version
+  s.dependency "RCTTypeSafety", version
   s.dependency "React-Core/CoreModulesHeaders", version
+  s.dependency "React-RCTImage", version
   s.dependency "ReactCommon/turbomodule/core", version
 end

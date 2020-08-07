@@ -1,3 +1,8 @@
+# Copyright (c) Facebook, Inc. and its affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
 Pod::Spec.new do |spec|
   spec.name = 'DoubleConversion'
   spec.version = '1.1.6'
@@ -12,5 +17,8 @@ Pod::Spec.new do |spec|
   spec.header_dir = 'double-conversion'
   spec.source_files = 'double-conversion/*.{h,cc}'
   spec.compiler_flags = '-Wno-unreachable-code'
+
+  # Pinning to the same version as React.podspec.
   spec.platforms = { :ios => "9.0", :tvos => "9.2" }
+
 end
